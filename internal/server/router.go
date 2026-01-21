@@ -1,11 +1,17 @@
 package server
 
 import (
-	"net/http"
-
+	"github.com/gin-gonic/gin"
 	"github.com/lmcosta10/wallet_service/internal/handler"
 )
 
-func InitializeRouter() {
-	http.Handle("/", http.HandlerFunc(handler.InitialHandler))
+func InitializeServer() {
+	r := gin.Default()
+	
+	r.GET("/", handler.InitialPage)
+    r.POST("/users", handler.PostUser)
+	r.GET("/users/:id", handler.GetUserById)
+
+
+	r.Run("localhost:7878")
 }
