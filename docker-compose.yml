@@ -1,0 +1,27 @@
+services:
+  db:
+    image: postgres:15
+    container_name: postgrescont
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgresdb
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  api:
+    build: .
+    ports:
+      - "7878:7878"
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: postgresdb
+    depends_on:
+      - db
+      
+volumes:
+  pgdata:

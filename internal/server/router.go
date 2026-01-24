@@ -2,16 +2,19 @@ package server
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/lmcosta10/wallet_service/internal/handler"
 )
 
-func InitializeServer() {
+func InitializeServer(db *pgxpool.Pool) {
 	r := gin.Default()
 	
+	userHandler := handler.NewUserHandler(db)
+	
 	r.GET("/", handler.InitialPage)
-    r.POST("/users", handler.PostUser)
-	r.GET("/users/:id", handler.GetUserById)
+	r.POST("/users", handler.PostUser) // change: userHandler here
+	r.GET("/users/:id", userHandler.GetUserById)
 
 
-	r.Run("localhost:7878")
+	r.Run(":7878")
 }
