@@ -9,7 +9,7 @@ A RESTful API for a digital wallet system, built with Go.
 
 ## Running Locally
 
-WARNING: Docker files contain mock credentials for development only.
+WARNING: Docker files contain mock credentials and /db/schema.sql contains mock data for development only.
 
 Run the project locally with:
 

@@ -9,6 +9,7 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgresdb
     volumes:
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
       - pgdata:/var/lib/postgresql/data
   api:
     build: .
