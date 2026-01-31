@@ -10,7 +10,9 @@ CREATE TABLE wallets (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE -- Delete row if user is deleted
 );
 
+-- ====================
 -- MOCK DATA
+-- ====================
 
 INSERT INTO users (username) VALUES
     ('Alice'),

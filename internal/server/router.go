@@ -19,10 +19,16 @@ func InitializeServer(db *pgxpool.Pool) {
 	userService := service.NewUserService(db)
 	userHandler := handler.NewUserHandler(userService)
 
+	walletService := service.NewWalletService(db)
+	walletHandler := handler.NewWalletHandler(walletService)
+
 	r.StaticFile("/favicon.ico", faviconPath)
 	r.GET("/", handler.InitialPage)
+	// Users:
 	r.POST("/users", handler.PostUser) // change: userHandler here
 	r.GET("/users/:id", userHandler.GetUserById)
+	// Wallets:
+	r.POST("/wallets", walletHandler.Transfer)
 
 	r.Run(":7878")
 }
